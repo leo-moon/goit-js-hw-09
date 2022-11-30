@@ -8,7 +8,6 @@ function getRandomHexColor() {
 
 const refs = {
   body: document.querySelector('body'),
-  // btnStart: document.querySelector('dataset start'),
   btnStart: document.querySelector('[data-start]'),
   btnStop: document.querySelector('[data-stop]')
 };
