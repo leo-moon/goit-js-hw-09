@@ -2,6 +2,74 @@ import flatpickr from "flatpickr";
 // Дополнительный импорт стилей
 import "flatpickr/dist/flatpickr.min.css";
 
+let msec = 0;
+var countDown;
+
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {},
+};
+
+const refs = {
+  dTimer: document.querySelector('.timer'),
+  dField: document.querySelectorAll('.timer .field'),
+  input:  document.querySelector('#datetime-picker'),
+  button: document.querySelector('button'),
+  spanD : document.querySelector('[data-days]'),
+  spanH : document.querySelector('[data-hours]'),
+  spanM : document.querySelector('[data-minutes]'),
+  spanS : document.querySelector('[data-seconds]'),
+  spanV : document.querySelectorAll('.value'),
+  spanL : document.querySelectorAll('.label'),
+}
+
+refs.input.style.padding = '0 10px';
+refs.input.style += `
+  width: '1000px';
+  height: '150px';
+  padding: 0 10px;
+  background-color: #ddd;
+`;
+// border: 1px solid #cccccc;
+
+for (v of refs.spanV) {
+  v.style += `
+    font-weight: 500;
+    font-weight: 500;
+    font-size: 30px;
+    margin: auto;
+  `
+};
+
+for (l of refs.spanL) {
+  l.style += `
+    font-weight: 400;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #212;
+  `
+};
+
+for (d of refs.dField) {
+  d.style += `
+  margin-right: 5px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  padding: 10px 5px;
+  margin-right: 5px;
+  `
+}
+// flex-direction: column;grid-columns: 140px;
+  // grid-gap: 12px;border: 1px solid #212;
+
+refs.dTimer.style.display = 'flex';
+
+
 function convertMs(ms) {
   // Number of milliseconds per unit of time
   const second = 1000;
@@ -27,12 +95,6 @@ function timerCount() {
 }
 
 function pad(value) {
-
-  // console.log(value, String(value).padStart(2, '0'));
-  // if (value.length === 1) {
-  //   value = '0' + value;
-  // }
-  // return value;
   return String(value).padStart(2, '0')
 }
 
@@ -52,35 +114,7 @@ function startCountdown () {
   }, 1000);
 }
 
-let msec = 0;
-var countDown;
 
-const options = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {},
-};
-
-const refs = {
-  dTimer: document.querySelector('.timer'),
-  dField: document.querySelectorAll('.timer .field'),
-  input:  document.querySelector('#datetime-picker'),
-  button: document.querySelector('button'),
-  spanD : document.querySelector('[data-days]'),
-  spanH : document.querySelector('[data-hours]'),
-  spanM : document.querySelector('[data-minutes]'),
-  spanS : document.querySelector('[data-seconds]'),
-}
-
-for (d of refs.dField) {
-  d.style.display = 'grid'
-}
-
-refs.dTimer.style.display = 'flex';
-
-// ежесекундная проверка
 
 flatpickr('#datetime-picker', options);
 
@@ -88,7 +122,7 @@ refs.input.addEventListener('input', main);
 
 
 function main() {
-  console.log( 'input.value',  new Date(refs.input.value));
+  // console.log( 'input.value',  new Date(refs.input.value));
   // разница между датами
   timerCount();
   // проверка даты
