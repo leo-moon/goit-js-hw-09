@@ -18,14 +18,12 @@ refs.btnStart.addEventListener('click', onBtnStart);
 refs.btnStop.addEventListener('click', onBtnStop);
 
 function onBtnStart(e) {
-// console.log('start');
-refs.btnStart.disabled = true ;
-refs.btnStop.disabled = false ;
-color = setInterval(changeColor, 1000);
+  refs.btnStart.disabled = true ;
+  refs.btnStop.disabled = false ;
+  color = setInterval(changeColor, 1000);
 };
 
 function onBtnStop(e) {
-  // console.log('stop');
   refs.btnStart.disabled = false ;
   refs.btnStop.disabled = true ;
   clearInterval(color);
