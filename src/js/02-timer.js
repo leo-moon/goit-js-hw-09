@@ -1,6 +1,9 @@
 import flatpickr from "flatpickr";
 // Дополнительный импорт стилей
 import "flatpickr/dist/flatpickr.min.css";
+import Notiflix from 'notiflix';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 
 let msec = 0;
 var countDown;
@@ -14,9 +17,10 @@ const options = {
 };
 
 const refs = {
+  body  : document.querySelector('body'),
   dTimer: document.querySelector('.timer'),
   dField: document.querySelectorAll('.timer .field'),
-  input:  document.querySelector('#datetime-picker'),
+  input : document.querySelector('#datetime-picker'),
   button: document.querySelector('button'),
   spanD : document.querySelector('[data-days]'),
   spanH : document.querySelector('[data-hours]'),
@@ -24,12 +28,24 @@ const refs = {
   spanS : document.querySelector('[data-seconds]'),
   spanV : document.querySelectorAll('.value'),
   spanL : document.querySelectorAll('.label'),
-}
+};
 
-refs.input.style.padding = '0 10px';
-refs.input.style += `
+
+// refs.body.style.justifyContent = 'center';
+// refs.body.style.alignItems = 'center';
+//  `
+//   align-items: center;
+//   padding: auto;
+//   align-items: center;
+// `;
+
+// for (i of refs.input) {
+// i.style += `
+refs.input.style +=`
   width: '1000px';
   height: '150px';
+  width: '1000px';
+  margin: 0 auto;
   padding: 0 10px;
   background-color: #ddd;
 `;
@@ -54,21 +70,23 @@ for (l of refs.spanL) {
 };
 
 for (d of refs.dField) {
-  d.style += `
-  margin-right: 5px;
+  d.style += `margin-right: 5px;
   display: grid;
-  align-items: center;
   justify-content: center;
+  
   width: 80px;
-  padding: 10px 5px;
-  margin-right: 5px;
+  padding: 5px 5px;
+  margin: 0 2px;
   `
 }
-// flex-direction: column;grid-columns: 140px;
+// flex-direction: column;grid-columns: 140px;align-items: center;
   // grid-gap: 12px;border: 1px solid #212;
 
 refs.dTimer.style.display = 'flex';
+refs.dTimer.style.justifyContent  = 'center';
 
+
+refs.button.disabled = true;
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -91,47 +109,51 @@ function convertMs(ms) {
 
 function timerCount() {
   msec = new Date(refs.input.value) - new Date();
-  console.log('count 9999',msec);
+  if (msec < 100) {
+    msec = 0;
+    clearInterval(countDown);
+  }
+  // console.log('count 9999',msec);
 }
 
-function pad(value) {
+function addLeadingZero(value) {
+  // контроль вывода двух цифр
   return String(value).padStart(2, '0')
 }
 
 function timer ({ days, hours, minutes, seconds }) {
-  console.log('count    0000111111',days , hours, minutes, seconds, msec );
-  refs.spanD.textContent = pad(days);
-  refs.spanH.textContent = pad(hours);
-  refs.spanM.textContent = pad(minutes);
-  refs.spanS.textContent = pad(seconds);
+  // console.log('count    0000111111',days , hours, minutes, seconds, msec );
+  refs.spanD.textContent = addLeadingZero(days);
+  refs.spanH.textContent = addLeadingZero(hours);
+  refs.spanM.textContent = addLeadingZero(minutes);
+  refs.spanS.textContent = addLeadingZero(seconds);
 };
 
 function startCountdown () {
-  refs.button.disabled = true;
-  countDown = setInterval(() => {
+  countDown = setInterval(() => {  
+    refs.button.disabled = true;
+    refs.button.style.backgroundColor = '#ccc';
     timerCount();
+
     timer(convertMs(msec));
   }, 1000);
 }
-
-
 
 flatpickr('#datetime-picker', options);
 
 refs.input.addEventListener('input', main);
 
-
 function main() {
-  // console.log( 'input.value',  new Date(refs.input.value));
   // разница между датами
   timerCount();
   // проверка даты
-  if (msec<5000) { 
-    console.log('ddddd'); 
+  if (msec<5000) {
+    Notify.failure('ГУСЬ, Please choose a date in the future');
     return
   };
   console.log('msec', convertMs(msec));
   // запуск таймера
+  refs.button.disabled = false;
+  refs.button.style.backgroundColor = '#00ee00';
   refs.button.addEventListener('click', startCountdown);
-
 };
