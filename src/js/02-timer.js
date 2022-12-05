@@ -1,7 +1,7 @@
 import flatpickr from "flatpickr";
 // Дополнительный импорт стилей
 import "flatpickr/dist/flatpickr.min.css";
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 
@@ -29,15 +29,6 @@ const refs = {
   spanV : document.querySelectorAll('.value'),
   spanL : document.querySelectorAll('.label'),
 };
-
-
-// refs.body.style.justifyContent = 'center';
-// refs.body.style.alignItems = 'center';
-//  `
-//   align-items: center;
-//   padding: auto;
-//   align-items: center;
-// `;
 
 // for (i of refs.input) {
 // i.style += `
