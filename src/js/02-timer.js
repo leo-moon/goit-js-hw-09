@@ -29,8 +29,6 @@ const refs = {
   spanL : document.querySelectorAll('.label'),
 };
 
-// for (i of refs.input) {
-// i.style += `
 refs.input.style +=`
   width: '1000px';
   height: '150px';
@@ -39,7 +37,6 @@ refs.input.style +=`
   padding: 0 10px;
   background-color: #ddd;
 `;
-// border: 1px solid #cccccc;
 
 for (const v of refs.spanV) {
   v.style += `
@@ -69,12 +66,9 @@ for (const d of refs.dField) {
   margin: 0 2px;
   `
 }
-// flex-direction: column;grid-columns: 140px;align-items: center;
-  // grid-gap: 12px;border: 1px solid #212;
 
 refs.dTimer.style.display = 'flex';
 refs.dTimer.style.justifyContent  = 'center';
-
 
 refs.button.disabled = true;
 
@@ -103,7 +97,6 @@ function timerCount() {
     msec = 0;
     clearInterval(countDown);
   }
-  // console.log('count 9999',msec);
 }
 
 function addLeadingZero(value) {
@@ -112,7 +105,6 @@ function addLeadingZero(value) {
 }
 
 function timer ({ days, hours, minutes, seconds }) {
-  // console.log('count    0000111111',days , hours, minutes, seconds, msec );
   refs.spanD.textContent = addLeadingZero(days);
   refs.spanH.textContent = addLeadingZero(hours);
   refs.spanM.textContent = addLeadingZero(minutes);
@@ -124,7 +116,6 @@ function startCountdown () {
     refs.button.disabled = true;
     refs.button.style.backgroundColor = '#ccc';
     timerCount();
-
     timer(convertMs(msec));
   }, 1000);
 }
