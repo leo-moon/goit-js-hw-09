@@ -41,7 +41,7 @@ refs.input.style +=`
 `;
 // border: 1px solid #cccccc;
 
-for (v of refs.spanV) {
+for (const v of refs.spanV) {
   v.style += `
     font-weight: 500;
     font-weight: 500;
@@ -50,7 +50,7 @@ for (v of refs.spanV) {
   `
 };
 
-for (l of refs.spanL) {
+for (const l of refs.spanL) {
   l.style += `
     font-weight: 400;
     text-transform: uppercase;
@@ -59,7 +59,7 @@ for (l of refs.spanL) {
   `
 };
 
-for (d of refs.dField) {
+for (const d of refs.dField) {
   d.style += `margin-right: 5px;
   display: grid;
   justify-content: center;
