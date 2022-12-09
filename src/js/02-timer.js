@@ -1,8 +1,9 @@
 import flatpickr from "flatpickr";
 // Дополнительный импорт стилей
-import "flatpickr/dist/flatpickr.min.css";
+// import "/flatpickr/dist/flatpickr.min.css";
+import "../../node_modules/flatpickr/dist/flatpickr.css";
 // import Notiflix from 'notiflix';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Notify } from "../../node_modules/notiflix/build/notiflix-notify-aio";
 
 let msec = 0;
 var countDown;
